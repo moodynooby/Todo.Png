@@ -18,6 +18,7 @@ import {
   getGridPoint,
   invariant,
   tupleToCoors,
+  viewportCoordsToSceneCoords,
 } from "@excalidraw/common";
 
 import type { Store } from "@excalidraw/element";
@@ -500,6 +501,7 @@ export class LinearElementEditor {
   ): LinearElementEditor {
     const elementsMap = scene.getNonDeletedElementsMap();
     const elements = scene.getNonDeletedElements();
+    const pointerCoords = viewportCoordsToSceneCoords(event, appState);
 
     const { elementId, selectedPointsIndices, isDragging, pointerDownState } =
       editingLinearElement;
@@ -555,13 +557,7 @@ export class LinearElementEditor {
 
           const bindingElement = isBindingEnabled(appState)
             ? getHoveredElementForBinding(
-                tupleToCoors(
-                  LinearElementEditor.getPointAtIndexGlobalCoordinates(
-                    element,
-                    selectedPoint!,
-                    elementsMap,
-                  ),
-                ),
+                pointerCoords,
                 elements,
                 elementsMap,
                 appState.zoom,
