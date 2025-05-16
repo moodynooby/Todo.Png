@@ -416,7 +416,7 @@ export const maybeSuggestBindingsForLinearElementAtCoords = (
   }
 
   const suggestedBindings = pointerCoords.reduce(
-    (acc: NonDeleted<ExcalidrawBindableElement>[], coords) => {
+    (acc: Set<NonDeleted<ExcalidrawBindableElement>>, coords) => {
       const hoveredBindableElement = getHoveredElementForBinding(
         coords,
         scene.getNonDeletedElements(),
@@ -425,6 +425,7 @@ export const maybeSuggestBindingsForLinearElementAtCoords = (
         isElbowArrow(linearElement),
         isElbowArrow(linearElement),
       );
+
       if (
         hoveredBindableElement != null &&
         !isLinearElementSimpleAndAlreadyBound(
@@ -433,14 +434,15 @@ export const maybeSuggestBindingsForLinearElementAtCoords = (
           hoveredBindableElement,
         )
       ) {
-        acc.push(hoveredBindableElement);
+        acc.add(hoveredBindableElement);
       }
+
       return acc;
     },
-    [],
+    new Set() as Set<NonDeleted<ExcalidrawBindableElement>>,
   );
 
-  return suggestedBindings;
+  return Array.from(suggestedBindings);
 };
 
 export const maybeBindLinearElement = (
@@ -580,7 +582,7 @@ export const isLinearElementSimpleAndAlreadyBound = (
 
 const isLinearElementSimple = (
   linearElement: NonDeleted<ExcalidrawLinearElement>,
-): boolean => linearElement.points.length < 3;
+): boolean => linearElement.points.length < 3 && !isElbowArrow(linearElement);
 
 const unbindLinearElement = (
   linearElement: NonDeleted<ExcalidrawLinearElement>,
