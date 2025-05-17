@@ -224,13 +224,11 @@ const intersectLinearOrFreeDrawWithLineSegment = (
   for (const shape of shapes) {
     switch (true) {
       case isCurve(shape):
-        //debugDrawCubicBezier(shape);
         intersections.push(
           ...curveIntersectLineSegment(shape as Curve<GlobalPoint>, segment),
         );
         continue;
       case isLineSegment(shape):
-        //debugDrawLine(shape);
         const point = lineSegmentIntersectionPoints(
           segment,
           shape as LineSegment<GlobalPoint>,
