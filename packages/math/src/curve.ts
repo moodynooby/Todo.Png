@@ -1,6 +1,14 @@
+import { invariant } from "@excalidraw/common";
+
 import type { Bounds } from "@excalidraw/element";
 
-import { isPoint, pointDistance, pointFrom, pointFromVector } from "./point";
+import {
+  isPoint,
+  pointCenter,
+  pointDistance,
+  pointFrom,
+  pointFromVector,
+} from "./point";
 import { rectangle, rectangleIntersectLineSegment } from "./rectangle";
 import { vector, vectorNormal, vectorNormalize, vectorScale } from "./vector";
 
@@ -407,4 +415,44 @@ export function offsetPointsForQuadraticBezier(
   }
 
   return offsetPoints;
+}
+
+export function curveLength<P extends GlobalPoint | LocalPoint>(
+  c: Curve<P>,
+): number {
+  // Use numerical integration to approximate the curve length
+  const steps = 50;
+  let length = 0;
+
+  // Calculate length by summing segments
+  let prevPoint = bezierEquation(c, 0);
+  for (let i = 1; i <= steps; i++) {
+    const t = i / steps;
+    const currentPoint = bezierEquation(c, t);
+    length += pointDistance(prevPoint, currentPoint);
+    prevPoint = currentPoint;
+  }
+
+  return length;
+}
+
+export function curveHalfPoint<P extends GlobalPoint | LocalPoint>(
+  c: Curve<P>,
+): P {
+  const steps = 50;
+  const halfLength = curveLength(c) / 2;
+
+  let length = 0;
+  let prevPoint = bezierEquation(c, 0);
+  for (let i = 1; i <= steps; i++) {
+    const t = i / steps;
+    const currentPoint = bezierEquation(c, t);
+    length += pointDistance(prevPoint, currentPoint);
+    if (length > halfLength) {
+      return pointCenter(prevPoint, currentPoint);
+    }
+    prevPoint = currentPoint;
+  }
+
+  invariant(false, "No half point found (this should not happen)");
 }

@@ -37,6 +37,7 @@ import {
   getCenterForBounds,
   getElementBounds,
   doBoundsIntersect,
+  aabbForElement,
 } from "./bounds";
 import { intersectElementWithLineSegment } from "./collision";
 import { distanceToElement } from "./distance";
@@ -61,7 +62,6 @@ import {
   isTextElement,
 } from "./typeChecks";
 
-import { aabbForElement } from "./shapes";
 import { updateElbowArrowPoints } from "./elbowArrow";
 
 import type { Scene } from "./Scene";

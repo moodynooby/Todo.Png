@@ -33,7 +33,6 @@ import type {
 
 import type { FrameNameBounds } from "@excalidraw/excalidraw/types";
 
-import { isPathALoop } from "./shapes";
 import { getElementBounds } from "./bounds";
 import {
   hasBoundTextElement,
@@ -47,6 +46,7 @@ import {
   deconstructDiamondElement,
   deconstructLinearOrFreeDrawElement,
   deconstructRectanguloidElement,
+  isPathALoop,
 } from "./utils";
 
 import { getBoundTextElement } from "./textElement";
