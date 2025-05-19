@@ -10,7 +10,7 @@ import {
   isCurve,
   isLineSegment,
   curveLength,
-  curveHalfPoint,
+  curvePointAtLength,
 } from "@excalidraw/math";
 
 import { getCurvePathOps } from "@excalidraw/utils/shape";
@@ -769,7 +769,7 @@ export class LinearElementEditor {
 
     switch (true) {
       case isCurve(shape):
-        return curveHalfPoint(shape as Curve<GlobalPoint>);
+        return curvePointAtLength(shape as Curve<GlobalPoint>, 0.5);
       case isLineSegment(shape):
         return pointCenter(shape[0] as GlobalPoint, shape[1] as GlobalPoint);
     }
