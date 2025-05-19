@@ -1,3 +1,5 @@
+export const PRECISION = 10e-5;
+
 // Legendre-Gauss abscissae (x values) and weights for n=24
 // Refeerence: https://pomax.github.io/bezierinfo/legendre-gauss.html
 export const LegendreGaussN24TValues = [
