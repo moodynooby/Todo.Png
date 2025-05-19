@@ -428,26 +428,23 @@ export function curvePointAtLength<P extends GlobalPoint | LocalPoint>(
   let currentLength = 0;
 
   // Tolerance for length comparison and iteration limit to avoid infinite loops
-  const tolerance = totalLength * 0.0001; // 0.01% of total length
+  const tolerance = totalLength * 0.0001;
   const maxIterations = 20;
 
   for (let iteration = 0; iteration < maxIterations; iteration++) {
     currentLength = curveLengthAtParameter(c, t);
     const error = Math.abs(currentLength - targetLength);
 
-    // If we're close enough, return the point
     if (error < tolerance) {
       break;
     }
 
-    // Update search range
     if (currentLength < targetLength) {
       tMin = t;
     } else {
       tMax = t;
     }
 
-    // Update parameter using bisection method
     t = (tMin + tMax) / 2;
   }
 
