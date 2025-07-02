@@ -118,14 +118,6 @@
     "unbindText": "Unbind text",
     "bindText": "Bind text to the container",
     "createContainerFromText": "Wrap text in a container",
-    "link": {
-      "edit": "Edit link",
-      "create": "Add link",
-      "label": "Link",
-      "empty": "No link is set",
-      "hint": "Type or paste your link here",
-      "goToElement": "Go to target element"
-    },
     "lineEditor": {
       "edit": "Edit line",
       "editArrow": "Edit arrow"
@@ -152,16 +144,9 @@
     "autoResize": "Enable text auto-resizing",
     "imageCropping": "Image cropping",
     "unCroppedDimension": "Uncropped dimension",
-    "copyElementLink": "Copy link to object",
-    "linkToElement": "Link to object",
     "wrapSelectionInFrame": "Wrap selection in frame",
     "tab": "Tab",
     "shapeSwitch": "Switch shape"
-  },
-  "elementLink": {
-    "title": "Link to object",
-    "desc": "Click on a shape on canvas or paste a link.",
-    "notFound": "Linked object wasn't found on canvas."
   },
   "search": {
     "title": "Find on canvas",
@@ -178,11 +163,9 @@
     "exportImage": "Export image...",
     "export": "Save to...",
     "copyToClipboard": "Copy to clipboard",
-    "copyLink": "Copy link",
     "save": "Save to current file",
     "saveAs": "Save as",
     "load": "Open",
-    "getShareableLink": "Get shareable link",
     "close": "Close",
     "selectLanguage": "Select language",
     "scrollBackToContent": "Scroll back to content",
@@ -209,16 +192,13 @@
   },
   "alerts": {
     "clearReset": "This will clear the whole canvas. Are you sure?",
-    "couldNotCreateShareableLink": "Couldn't create shareable link.",
-    "couldNotCreateShareableLinkTooBig": "Couldn't create shareable link: the scene is too big",
     "couldNotLoadInvalidFile": "Couldn't load invalid file",
     "importBackendFailed": "Importing from backend failed.",
     "cannotExportEmptyCanvas": "Cannot export empty canvas.",
     "couldNotCopyToClipboard": "Couldn't copy to clipboard.",
     "loadSceneOverridePrompt": "Loading external drawing will replace your existing content. Do you wish to continue?",
     "imageDoesNotContainScene": "This image does not seem to contain any scene data. Have you enabled scene embedding during export?",
-    "cannotRestoreFromImage": "Scene couldn't be restored from this image file",
-    "invalidSceneUrl": "Couldn't import scene from the supplied URL. It's either malformed, or doesn't contain valid Excalidraw JSON data."
+    "cannotRestoreFromImage": "Scene couldn't be restored from this image file"
   },
   "errors": {
     "unsupportedFileType": "Unsupported file type.",
@@ -229,9 +209,7 @@
     "imageToolNotSupported": "Images are disabled.",
     "brave_measure_text_error": {
       "line1": "Looks like you are using Brave browser with the <bold>Aggressively Block Fingerprinting</bold> setting enabled.",
-      "line2": "This could result in breaking the <bold>Text Elements</bold> in your drawings.",
-      "line3": "We strongly recommend disabling this setting. You can follow <link>these steps</link> on how to do so.",
-      "line4": "If disabling this setting doesn't fix the display of text elements, please open an <issueLink>issue</issueLink> on our GitHub, or write us on <discordLink>Discord</discordLink>"
+      "line2": "This could result in breaking the <bold>Text Elements</bold> in your drawings."
     },
     "asyncPasteFailedOnRead": "Couldn't paste (couldn't read from system clipboard).",
     "asyncPasteFailedOnParse": "Couldn't paste.",
@@ -249,7 +227,6 @@
     "text": "Text",
     "lock": "Keep selected tool active after drawing",
     "penMode": "Pen mode - prevent touch",
-    "link": "Add / Update link for a selected shape",
     "eraser": "Eraser",
     "frame": "Frame tool",
     "laser": "Laser pointer",
@@ -316,7 +293,6 @@
     "openIssueMessage": "We were very cautious not to include your scene information on the error. If your scene is not private, please consider following up on our <button>bug tracker</button>. Please include information below by copying and pasting into the GitHub issue.",
     "sceneContent": "Scene content:"
   },
-
   "errorDialog": {
     "title": "Error"
   },
@@ -324,9 +300,6 @@
     "disk_title": "Save to disk",
     "disk_details": "Export the scene data to a file from which you can import later.",
     "disk_button": "Save to file",
-    "link_title": "Shareable link",
-    "link_details": "Export as a read-only link.",
-    "link_button": "Export to Link",
     "excalidrawplus_description": "Save the scene to your Excalidraw+ workspace.",
     "excalidrawplus_button": "Export",
     "excalidrawplus_exportError": "Couldn't export to Excalidraw+ at this moment..."
@@ -367,7 +340,6 @@
   "clearCanvasDialog": {
     "title": "Clear canvas"
   },
-
   "imageExportDialog": {
     "header": "Export image",
     "label": {
@@ -416,8 +388,7 @@
     "fileSavedToFilename": "Saved to {filename}",
     "canvas": "canvas",
     "selection": "selection",
-    "pasteAsSingleElement": "Use {{shortcut}} to paste as a single element,\nor paste into an existing text editor",
-    "elementLinkCopied": "Link copied to clipboard"
+    "pasteAsSingleElement": "Use {{shortcut}} to paste as a single element,\nor paste into an existing text editor"
   },
   "colors": {
     "transparent": "Transparent",
