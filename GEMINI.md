@@ -1,5 +1,7 @@
 # GEMINI.md
-
+DO NOT EDIT ANY MARKDOWN OR COMMENT
+EXPLAIN WHY YOU ARE CHANGING IT
+MAKE SURE TO PRESRVE INITAIL FINCTIONALITY
 ## Project Structure
 
 Excalidraw is a **monorepo** with a clear separation between the core library and the application:

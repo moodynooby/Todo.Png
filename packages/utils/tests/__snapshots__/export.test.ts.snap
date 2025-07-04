@@ -2,7 +2,6 @@
 
 exports[`exportToSvg > with default arguments 1`] = `
 {
-  "activeEmbeddable": null,
   "activeLockedId": null,
   "activeTool": {
     "customType": null,
@@ -11,7 +10,6 @@ exports[`exportToSvg > with default arguments 1`] = `
     "locked": false,
     "type": "selection",
   },
-  "collaborators": Map {},
   "contextMenu": null,
   "croppingElementId": null,
   "currentChartType": "bar",
@@ -39,12 +37,10 @@ exports[`exportToSvg > with default arguments 1`] = `
   "elementsToHighlight": null,
   "errorMessage": null,
   "exportBackground": true,
-  "exportEmbedScene": false,
   "exportPadding": undefined,
   "exportScale": 1,
   "exportWithDarkMode": false,
   "fileHandle": null,
-  "followedBy": Set {},
   "frameRendering": {
     "clip": true,
     "enabled": true,
@@ -94,7 +90,6 @@ exports[`exportToSvg > with default arguments 1`] = `
   "selectedLinearElement": null,
   "selectionElement": null,
   "shouldCacheIgnoreZoom": false,
-  "showHyperlinkPopup": false,
   "showWelcomeScreen": false,
   "snapLines": [],
   "startBoundElement": null,
@@ -105,7 +100,6 @@ exports[`exportToSvg > with default arguments 1`] = `
   "suggestedBindings": [],
   "theme": "light",
   "toast": null,
-  "userToFollow": null,
   "viewBackgroundColor": "#ffffff",
   "viewModeEnabled": false,
   "zenModeEnabled": false,

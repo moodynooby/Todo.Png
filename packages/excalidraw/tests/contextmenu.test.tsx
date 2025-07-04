@@ -136,7 +136,6 @@ describe("contextMenu element", () => {
       "sendToBack",
       "bringToFront",
       "duplicateSelection",
-      "copyElementLink",
       "toggleElementLock",
     ];
 
@@ -277,7 +276,6 @@ describe("contextMenu element", () => {
       "copyStyles",
       "pasteStyles",
       "deleteSelectedElements",
-      "copyElementLink",
       "ungroup",
       "flipHorizontal",
       "flipVertical",

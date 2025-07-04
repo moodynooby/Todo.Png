@@ -292,8 +292,8 @@ describe("exporting frames", () => {
         exportingFrame: frame,
       });
 
-      // frame itself isn't exported
-      expect(svg.querySelector(`[data-id="${frame.id}"]`)).toBeNull();
+      // frame itself is exported as clipPath
+      expect(svg.querySelector(`clipPath[data-id="${frame.id}"]`)).not.toBeNull();
       // frame child is exported
       expect(svg.querySelector(`[data-id="${frameChild.id}"]`)).not.toBeNull();
       // overlapping element is exported
@@ -336,8 +336,8 @@ describe("exporting frames", () => {
         exportingFrame: frame,
       });
 
-      // frame itself isn't exported
-      expect(svg.querySelector(`[data-id="${frame.id}"]`)).toBeNull();
+      // frame itself is exported as clipPath
+      expect(svg.querySelector(`clipPath[data-id="${frame.id}"]`)).not.toBeNull();
       // frame child is exported
       expect(svg.querySelector(`[data-id="${frameChild.id}"]`)).not.toBeNull();
       // non-overlapping element is not exported
@@ -405,8 +405,8 @@ describe("exporting frames", () => {
       });
 
       // frames themselves should be exported when multiple frames selected
-      expect(svg.querySelector(`[data-id="${frame1.id}"]`)).not.toBeNull();
-      expect(svg.querySelector(`[data-id="${frame2.id}"]`)).not.toBeNull();
+      expect(svg.querySelector(`clipPath[data-id="${frame1.id}"]`)).not.toBeNull();
+      expect(svg.querySelector(`clipPath[data-id="${frame2.id}"]`)).not.toBeNull();
       // children should be epxorted
       expect(svg.querySelector(`[data-id="${frame1Child.id}"]`)).not.toBeNull();
       expect(svg.querySelector(`[data-id="${frame2Child.id}"]`)).not.toBeNull();
@@ -449,8 +449,8 @@ describe("exporting frames", () => {
         exportingFrame,
       });
 
-      // frame itself isn't exported
-      expect(svg.querySelector(`[data-id="${frame.id}"]`)).not.toBeNull();
+      // frame itself is exported as clipPath
+      expect(svg.querySelector(`clipPath[data-id="${frame.id}"]`)).not.toBeNull();
 
       expect(svg.getAttribute("width")).toBe(frame.width.toString());
       expect(svg.getAttribute("height")).toBe(
@@ -508,8 +508,8 @@ describe("exporting frames", () => {
         exportingFrame,
       });
 
-      // frame shouldn't be exported
-      expect(svg.querySelector(`[data-id="${frame1.id}"]`)).toBeNull();
+      // frame itself is exported as clipPath
+      expect(svg.querySelector(`clipPath[data-id="${frame1.id}"]`)).not.toBeNull();
       // frame1 child should be epxorted
       expect(svg.querySelector(`[data-id="${frame1Child.id}"]`)).not.toBeNull();
       // frame2 child should not be exported even if it physically overlaps with

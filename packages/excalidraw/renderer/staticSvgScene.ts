@@ -344,7 +344,7 @@ const renderElementToSvg = (
 
           symbol.appendChild(image);
 
-          (root.querySelector("defs") || root).prepend(symbol);
+          svgRoot.querySelector("defs")!.prepend(symbol);
         }
 
         const use = svgRoot.ownerDocument!.createElementNS(SVG_NS, "use");
@@ -460,7 +460,18 @@ const renderElementToSvg = (
       break;
     }
     // frames are not rendered and only acts as a container
-    case "frame":
+    case "frame": {
+      const clipPath = svgRoot.ownerDocument!.createElementNS(SVG_NS, "clipPath");
+      clipPath.id = element.id;
+      const rect = svgRoot.ownerDocument!.createElementNS(SVG_NS, "rect");
+      rect.setAttribute("x", `${offsetX}`);
+      rect.setAttribute("y", `${offsetY}`);
+      rect.setAttribute("width", `${element.width}`);
+      rect.setAttribute("height", `${element.height}`);
+      clipPath.appendChild(rect);
+      addToRoot(clipPath, element);
+      break;
+    }
     default: {
       if (isTextElement(element)) {
         const node = svgRoot.ownerDocument!.createElementNS(SVG_NS, "g");
@@ -579,25 +590,6 @@ export const renderSceneToSvg = (
             renderConfig,
           );
         }
-      } catch (error: any) {
-        console.error(error);
-      }
-    }
-  });
-
-  elements.forEach((element) => {
-    if (!element.isDeleted) {
-      try {
-        renderElementToSvg(
-          element,
-          elementsMap,
-          rsvg,
-          svgRoot,
-          files,
-          element.x + renderConfig.offsetX,
-          element.y + renderConfig.offsetY,
-          renderConfig,
-        );
       } catch (error: any) {
         console.error(error);
       }
