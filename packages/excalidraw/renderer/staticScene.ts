@@ -1,5 +1,4 @@
 import { FRAME_STYLE, throttleRAF } from "@excalidraw/common";
-import { isElementLink } from "@excalidraw/element";
 import { getBoundTextElement } from "@excalidraw/element";
 import { isTextElement } from "@excalidraw/element";
 import {
@@ -10,14 +9,7 @@ import {
 
 import { renderElement } from "@excalidraw/element";
 
-import { getElementAbsoluteCoords } from "@excalidraw/element";
-
-import type {
-  ElementsMap,
-  ExcalidrawFrameLikeElement,
-  NonDeletedExcalidrawElement,
-} from "@excalidraw/element/types";
-
+import type { ExcalidrawFrameLikeElement } from "@excalidraw/element/types";
 
 import { bootstrapCanvas, getNormalizedCanvasDimensions } from "./helpers";
 
@@ -127,16 +119,6 @@ const frameClip = (
     -(frame.x + appState.scrollX),
     -(frame.y + appState.scrollY),
   );
-};
-
-type LinkIconCanvas = HTMLCanvasElement & { zoom: number };
-
-const linkIconCanvasCache: {
-  regularLink: LinkIconCanvas | null;
-  elementLink: LinkIconCanvas | null;
-} = {
-  regularLink: null,
-  elementLink: null,
 };
 
 const _renderStaticScene = ({
@@ -278,7 +260,6 @@ const _renderStaticScene = ({
       }
 
       context.restore();
-
     } catch (error: any) {
       console.error(
         error,

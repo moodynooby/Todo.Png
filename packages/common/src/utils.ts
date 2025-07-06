@@ -29,8 +29,6 @@ import {
 
 import type { MaybePromise, ResolutionType } from "./utility-types";
 
-import type { EVENT } from "./constants";
-
 let mockDateTime: string | null = null;
 
 export const setDateTimeForTests = (dateTime: string) => {
@@ -778,7 +776,6 @@ export const isProdEnv = () => import.meta.env.MODE === ENV.PRODUCTION;
 
 export const isServerEnv = () =>
   typeof process !== "undefined" && !!process?.env?.NODE_ENV;
-
 
 export const updateObject = <T extends Record<string, any>>(
   obj: T,
