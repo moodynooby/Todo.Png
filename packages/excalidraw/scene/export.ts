@@ -472,7 +472,8 @@ export const encodeSvgBase64Payload = ({
   );
   metadataElement.appendChild(createHTMLComment("payload-version:2"));
   metadataElement.appendChild(createHTMLComment("payload-start"));
-  metadataElement.appendChild(document.createTextNode(base64));
+  // Commented out to prevent embedding scene data
+  // metadataElement.appendChild(document.createTextNode(base64));
   metadataElement.appendChild(createHTMLComment("payload-end"));
 };
 

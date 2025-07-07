@@ -719,10 +719,7 @@ export const renderElement = (
   renderConfig: StaticCanvasRenderConfig,
   appState: StaticCanvasAppState,
 ) => {
-  const reduceAlphaForSelection =
-    appState.openDialog?.name === "elementLinkSelector" &&
-    !appState.selectedElementIds[element.id] &&
-    !appState.hoveredElementIds[element.id];
+  const reduceAlphaForSelection = false;
 
   context.globalAlpha = getRenderOpacity(
     element,

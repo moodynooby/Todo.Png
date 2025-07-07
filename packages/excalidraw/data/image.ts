@@ -41,7 +41,8 @@ export const encodePngMetadata = async ({
     ),
   );
   // insert metadata before last chunk (iEND)
-  chunks.splice(-1, 0, metadataChunk);
+  // Commented out to prevent embedding scene data
+  // chunks.splice(-1, 0, metadataChunk);
 
   return new Blob([encodePng(chunks)], { type: MIME_TYPES.png });
 };

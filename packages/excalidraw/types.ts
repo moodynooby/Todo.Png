@@ -294,8 +294,7 @@ export interface AppState {
   openDialog:
     | null
     | { name: "imageExport" | "help" | "jsonExport" }
-    | { name: "commandPalette" }
-    | { name: "elementLinkSelector"; sourceElementId: ExcalidrawElement["id"] };
+    | { name: "commandPalette" };
 
   /**
    * Reflects user preference for whether the default sidebar should be docked.
@@ -478,7 +477,6 @@ export interface ExcalidrawProps {
   handleKeyboardGlobally?: boolean;
   autoFocus?: boolean;
   generateIdForFile?: (file: File) => string | Promise<string>;
-  generateLinkForSelection?: (id: string, type: "element" | "group") => string;
   onLinkOpen?: (
     element: NonDeletedExcalidrawElement,
     event: CustomEvent<{

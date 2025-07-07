@@ -1862,9 +1862,12 @@ class App extends React.Component<AppProps, AppState> {
     // cleanup
     if (prevState.openDialog?.name !== this.state.openDialog?.name) {
       this.deselectElements();
-      this.setState({
-        hoveredElementIds: {},
-      });
+      // Condition was: if (this.state.openDialog?.name === "elementLinkSelector")
+      if (false) {
+        this.setState({
+          hoveredElementIds: {},
+        });
+      }
     }
 
     if (prevProps.zenModeEnabled !== this.props.zenModeEnabled) {
@@ -2658,13 +2661,18 @@ class App extends React.Component<AppProps, AppState> {
             animate: opts?.animate ?? true,
           });
         } else if (isElementLink(target)) {
-          this.setState({
-            toast: {
-              message: t("elementLink.notFound"),
-              duration: 3000,
-              closable: true,
-            },
-          });
+          // This was originally for: this.state.openDialog?.name === "elementLinkSelector"
+          // No longer applicable as elementLinkSelector dialog is removed.
+          // Keeping the structure in case related error handling is needed.
+          if (false) {
+            this.setState({
+              toast: {
+                message: t("elementLink.notFound"),
+                duration: 3000,
+                closable: true,
+              },
+            });
+          }
         }
       }
       return;
@@ -3251,7 +3259,8 @@ class App extends React.Component<AppProps, AppState> {
         }
       }
 
-      if (this.state.openDialog?.name === "elementLinkSelector") {
+      // Condition was: if (this.state.openDialog?.name === "elementLinkSelector")
+      if (false) {
         return;
       }
 
@@ -3533,10 +3542,9 @@ class App extends React.Component<AppProps, AppState> {
 
   private onKeyUp = withBatchedUpdates((event: KeyboardEvent) => {
     if (event.key === KEYS.SPACE) {
-      if (
-        this.state.viewModeEnabled ||
-        this.state.openDialog?.name === "elementLinkSelector"
-      ) {
+      // Condition was: this.state.viewModeEnabled || this.state.openDialog?.name === "elementLinkSelector"
+      // which simplifies to: this.state.viewModeEnabled || false -> this.state.viewModeEnabled
+      if (this.state.viewModeEnabled) {
         setCursor(this.interactiveCanvas, CURSOR_TYPE.GRAB);
       } else if (this.state.activeTool.type === "selection") {
         resetCursor(this.interactiveCanvas);
@@ -4962,7 +4970,8 @@ class App extends React.Component<AppProps, AppState> {
       return;
     }
 
-    if (this.state.openDialog?.name === "elementLinkSelector" && hitElement) {
+    // Condition was: if (this.state.openDialog?.name === "elementLinkSelector" && hitElement)
+    if (false && hitElement) {
       this.setState((prevState) => {
         return {
           hoveredElementIds: updateStable(
@@ -4980,8 +4989,8 @@ class App extends React.Component<AppProps, AppState> {
         };
       });
     } else if (
-      this.state.openDialog?.name === "elementLinkSelector" &&
-      !hitElement
+      // Condition was: else if (this.state.openDialog?.name === "elementLinkSelector" && !hitElement)
+      false && !hitElement
     ) {
       this.setState((prevState) => ({
         hoveredElementIds: updateStable(prevState.hoveredElementIds, {}),
@@ -5181,10 +5190,9 @@ class App extends React.Component<AppProps, AppState> {
             this.state,
           ),
         },
-        captureUpdate:
-          this.state.openDialog?.name === "elementLinkSelector"
-            ? CaptureUpdateAction.EVENTUALLY
-            : CaptureUpdateAction.NEVER,
+        // Condition was: this.state.openDialog?.name === "elementLinkSelector" ? CaptureUpdateAction.EVENTUALLY : CaptureUpdateAction.NEVER
+        // which simplifies to: false ? CaptureUpdateAction.EVENTUALLY : CaptureUpdateAction.NEVER -> CaptureUpdateAction.NEVER
+        captureUpdate: CaptureUpdateAction.NEVER,
       });
       return;
     }

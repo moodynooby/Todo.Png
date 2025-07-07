@@ -42,7 +42,6 @@ import { useDevice } from "./App";
 import { OverwriteConfirmDialog } from "./OverwriteConfirm/OverwriteConfirm";
 import { DefaultSidebar } from "./DefaultSidebar";
 import { Stats } from "./Stats";
-import ElementLinkDialog from "./ElementLinkDialog";
 import { ErrorDialog } from "./ErrorDialog";
 import { EyeDropper, activeEyeDropperAtom } from "./EyeDropper";
 import { FixedSideContainer } from "./FixedSideContainer";
@@ -87,7 +86,6 @@ interface LayerUIProps {
   renderWelcomeScreen: boolean;
   children?: React.ReactNode;
   app: AppClassProperties;
-  generateLinkForSelection?: AppProps["generateLinkForSelection"];
 }
 
 const DefaultMainMenu: React.FC<{
@@ -139,7 +137,6 @@ const LayerUI = ({
   renderWelcomeScreen,
   children,
   app,
-  generateLinkForSelection,
 }: LayerUIProps) => {
   const device = useDevice();
   const tunnels = useInitializeTunnels();
@@ -231,8 +228,7 @@ const LayerUI = ({
     const shouldShowStats =
       appState.stats.open &&
       !appState.zenModeEnabled &&
-      !appState.viewModeEnabled &&
-      appState.openDialog?.name !== "elementLinkSelector";
+      !appState.viewModeEnabled;
 
     return (
       <FixedSideContainer side="top">
@@ -241,8 +237,7 @@ const LayerUI = ({
             {renderCanvasActions()}
             {shouldRenderSelectedShapeActions && renderSelectedShapeActions()}
           </Stack.Col>
-          {!appState.viewModeEnabled &&
-            appState.openDialog?.name !== "elementLinkSelector" && (
+          {!appState.viewModeEnabled && (
               <Section heading="shapes" className="shapes-section">
                 {(heading: React.ReactNode) => (
                   <div style={{ position: "relative" }}>
@@ -316,7 +311,6 @@ const LayerUI = ({
           >
             {renderTopRightUI?.(device.editor.isMobile, appState)}
             {!appState.viewModeEnabled &&
-              appState.openDialog?.name !== "elementLinkSelector" &&
               // hide button when sidebar docked
               (!isSidebarDocked ||
                 appState.openSidebar?.name !== DEFAULT_SIDEBAR.name) && (
@@ -425,19 +419,6 @@ const LayerUI = ({
         />
       )}
       <ActiveConfirmDialog />
-      {appState.openDialog?.name === "elementLinkSelector" && (
-        <ElementLinkDialog
-          sourceElementId={appState.openDialog.sourceElementId}
-          onClose={() => {
-            setAppState({
-              openDialog: null,
-            });
-          }}
-          scene={app.scene}
-          appState={appState}
-          generateLinkForSelection={generateLinkForSelection}
-        />
-      )}
       <tunnels.OverwriteConfirmDialogTunnel.Out />
       {renderImageExportDialog()}
       {renderJSONExportDialog()}

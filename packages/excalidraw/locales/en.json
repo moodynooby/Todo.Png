@@ -158,11 +158,6 @@
     "tab": "Tab",
     "shapeSwitch": "Switch shape"
   },
-  "elementLink": {
-    "title": "Link to object",
-    "desc": "Click on a shape on canvas or paste a link.",
-    "notFound": "Linked object wasn't found on canvas."
-  },
   "search": {
     "title": "Find on canvas",
     "noMatch": "No matches found...",
@@ -416,8 +411,7 @@
     "fileSavedToFilename": "Saved to {filename}",
     "canvas": "canvas",
     "selection": "selection",
-    "pasteAsSingleElement": "Use {{shortcut}} to paste as a single element,\nor paste into an existing text editor",
-    "elementLinkCopied": "Link copied to clipboard"
+    "pasteAsSingleElement": "Use {{shortcut}} to paste as a single element,\nor paste into an existing text editor"
   },
   "colors": {
     "transparent": "Transparent",
