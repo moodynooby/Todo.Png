@@ -59,7 +59,7 @@ export type ElementConstructorOpts = MarkOptional<
   | "seed"
   | "version"
   | "versionNonce"
-  | "link"
+  // | "link" // Removed as it's no longer a direct property
   | "strokeStyle"
   | "fillStyle"
   | "strokeColor"
@@ -92,7 +92,7 @@ const _newElementBase = <T extends ExcalidrawElement>(
     index = null,
     roundness = null,
     boundElements = null,
-    link = null,
+    // link = null, // Removed: "link" is not a direct property
     locked = DEFAULT_ELEMENT_PROPS.locked,
     ...rest
   }: ElementConstructorOpts & Omit<Partial<ExcalidrawGenericElement>, "type">,
@@ -145,7 +145,7 @@ const _newElementBase = <T extends ExcalidrawElement>(
     isDeleted: false as false,
     boundElements,
     updated: getUpdatedTimestamp(),
-    link,
+    // link, // Removed: "link" is not a direct property
     locked,
     customData: rest.customData,
   };

@@ -24,7 +24,7 @@ import { useEffect, useRef, useState } from "react";
 import { useCallbackRefState } from "@excalidraw/excalidraw/hooks/useCallbackRefState";
 import { t } from "@excalidraw/excalidraw/i18n";
 
-import { isElementLink } from "@excalidraw/element";
+// import { isElementLink } from "@excalidraw/element"; // Removed: No longer exported
 import { newElementWith } from "@excalidraw/element";
 import { isInitializedImageElement } from "@excalidraw/element";
 
@@ -194,6 +194,19 @@ const ExcalidrawWrapper = () => {
     useCallbackRefState<ExcalidrawImperativeAPI>();
 
   const [, forceRefresh] = useState(false);
+
+// Helper function (similar to the one in packages/excalidraw/components/App.tsx)
+// TODO: Consolidate this if used in multiple places, or ensure it aligns with
+// the actual new way of handling element links if different.
+constExcalidrawLINK_REG = /\b(excalidraw\.com\/#room=|excalidraw-app\/#room=|excalidraw\.com\/#json=|excalidraw-app\/#json=)/;
+constExcalidrawELEMENT_LINK_REG = /#element=([\w-]+)/;
+
+const isElementLink = (link: string | null | undefined): boolean => {
+  if (!link) {
+    return false;
+  }
+  return ExcalidrawLINK_REG.test(link) || ExcalidrawELEMENT_LINK_REG.test(link);
+};
 
   useEffect(() => {
     if (isDevEnv()) {
@@ -452,9 +465,12 @@ const ExcalidrawWrapper = () => {
         autoFocus={true}
         theme={editorTheme}
         onLinkOpen={(element, event) => {
-          if (element.link && isElementLink(element.link)) {
+          // Ensure customData and hyperlink are checked safely
+          const link = (element as any).customData?.hyperlink;
+          if (link && isElementLink(link)) {
             event.preventDefault();
-            excalidrawAPI?.scrollToContent(element.link, { animate: true });
+            // Pass the element itself, scrollToContent can handle it
+            excalidrawAPI?.scrollToContent(element, { animate: true });
           }
         }}
       >
