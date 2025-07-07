@@ -66,7 +66,7 @@ const getNonDeletedElements = <T extends ExcalidrawElement>(
 
 const validateIndicesThrottled = throttle(
   (elements: readonly ExcalidrawElement[]) => {
-    if (isDevEnv() || isTestEnv() || window?.DEBUG_FRACTIONAL_INDICES) {
+    if (isDevEnv() || isTestEnv()) {
       validateFractionalIndices(elements, {
         // throw only in dev & test, to remain functional on `DEBUG_FRACTIONAL_INDICES`
         shouldThrow: isDevEnv() || isTestEnv(),

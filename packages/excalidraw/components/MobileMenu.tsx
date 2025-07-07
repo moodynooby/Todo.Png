@@ -49,7 +49,6 @@ type MobileMenuProps = {
   renderCustomStats?: ExcalidrawProps["renderCustomStats"];
   renderSidebars: () => JSX.Element | null;
   device: Device;
-  renderWelcomeScreen: boolean;
   UIOptions: AppProps["UIOptions"];
   app: AppClassProperties;
 };
@@ -67,19 +66,16 @@ export const MobileMenu = ({
   renderCustomStats,
   renderSidebars,
   device,
-  renderWelcomeScreen,
   UIOptions,
   app,
 }: MobileMenuProps) => {
   const {
-    WelcomeScreenCenterTunnel,
     MainMenuTunnel,
     DefaultSidebarTriggerTunnel,
   } = useTunnels();
   const renderToolbar = () => {
     return (
       <FixedSideContainer side="top" className="App-top-bar">
-        {renderWelcomeScreen && <WelcomeScreenCenterTunnel.Out />}
         <Section heading="shapes">
           {(heading: React.ReactNode) => (
             <Stack.Col gap={4} align="center">
@@ -97,10 +93,9 @@ export const MobileMenu = ({
                 </Island>
                 {renderTopRightUI && renderTopRightUI(true, appState)}
                 <div className="mobile-misc-tools-container">
-                  {!appState.viewModeEnabled &&
-                    appState.openDialog?.name !== "elementLinkSelector" && (
-                      <DefaultSidebarTriggerTunnel.Out />
-                    )}
+                  {!appState.viewModeEnabled && (
+                    <DefaultSidebarTriggerTunnel.Out />
+                  )}
                   <PenModeButton
                     checked={appState.penMode}
                     onChange={() => onPenModeToggle(null)}
@@ -136,10 +131,7 @@ export const MobileMenu = ({
   };
 
   const renderAppToolbar = () => {
-    if (
-      appState.viewModeEnabled ||
-      appState.openDialog?.name === "elementLinkSelector"
-    ) {
+    if (appState.viewModeEnabled) {
       return (
         <div className="App-toolbar-content">
           <MainMenuTunnel.Out />
@@ -166,9 +158,7 @@ export const MobileMenu = ({
   return (
     <>
       {renderSidebars()}
-      {!appState.viewModeEnabled &&
-        appState.openDialog?.name !== "elementLinkSelector" &&
-        renderToolbar()}
+      {!appState.viewModeEnabled && renderToolbar()}
       <div
         className="App-bottom-bar"
         style={{
@@ -179,9 +169,8 @@ export const MobileMenu = ({
       >
         <Island padding={0}>
           {appState.openMenu === "shape" &&
-          !appState.viewModeEnabled &&
-          appState.openDialog?.name !== "elementLinkSelector" &&
-          showSelectedShapeActions(appState, elements) ? (
+            !appState.viewModeEnabled &&
+            showSelectedShapeActions(appState, elements) ? (
             <Section className="App-mobile-menu" heading="selectedShapeActions">
               <SelectedShapeActions
                 appState={appState}

@@ -871,19 +871,10 @@ export const isShallowEqual = <
         : {
             _error: "keys are either missing or include keys not in compared obj";
           }),
-  debug = false,
 ) => {
   const aKeys = Object.keys(objA);
   const bKeys = Object.keys(objB);
   if (aKeys.length !== bKeys.length) {
-    if (debug) {
-      console.warn(
-        `%cisShallowEqual: objects don't have same properties ->`,
-        "color: #8B4000",
-        objA,
-        objB,
-      );
-    }
     return false;
   }
 
@@ -893,14 +884,6 @@ export const isShallowEqual = <
         objA[key] === objB[key] ||
         _defaultIsShallowComparatorFallback(objA[key], objB[key]);
       if (!ret) {
-        if (debug) {
-          console.warn(
-            `%cisShallowEqual: ${key} not equal ->`,
-            "color: #8B4000",
-            objA[key],
-            objB[key],
-          );
-        }
         return false;
       }
     }
@@ -915,15 +898,6 @@ export const isShallowEqual = <
       ? comparator(objA[key], objB[key])
       : objA[key] === objB[key] ||
         _defaultIsShallowComparatorFallback(objA[key], objB[key]);
-
-    if (!ret && debug) {
-      console.warn(
-        `%cisShallowEqual: ${key} not equal ->`,
-        "color: #8B4000",
-        objA[key],
-        objB[key],
-      );
-    }
     return ret;
   });
 };

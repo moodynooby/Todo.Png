@@ -204,7 +204,6 @@ export interface AppState {
     top: number;
     left: number;
   } | null;
-  showWelcomeScreen: boolean;
   isLoading: boolean;
   errorMessage: React.ReactNode;
   /**
@@ -295,7 +294,6 @@ export interface AppState {
     | null
     | { name: "imageExport" | "help" | "jsonExport" }
     | { name: "commandPalette" }
-    | { name: "elementLinkSelector"; sourceElementId: ExcalidrawElement["id"] };
 
   /**
    * Reflects user preference for whether the default sidebar should be docked.
@@ -540,8 +538,6 @@ export type UIOptions = Partial<{
   tools: {
     image: boolean;
   };
-  /** @deprecated does nothing. Will be removed in 0.15 */
-  welcomeScreen?: boolean;
 }>;
 
 export type AppProps = Merge<

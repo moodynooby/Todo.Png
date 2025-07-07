@@ -42,7 +42,6 @@ import { useDevice } from "./App";
 import { OverwriteConfirmDialog } from "./OverwriteConfirm/OverwriteConfirm";
 import { DefaultSidebar } from "./DefaultSidebar";
 import { Stats } from "./Stats";
-import ElementLinkDialog from "./ElementLinkDialog";
 import { ErrorDialog } from "./ErrorDialog";
 import { EyeDropper, activeEyeDropperAtom } from "./EyeDropper";
 import { FixedSideContainer } from "./FixedSideContainer";
@@ -84,7 +83,6 @@ interface LayerUIProps {
   renderCustomStats?: ExcalidrawProps["renderCustomStats"];
   UIOptions: AppProps["UIOptions"];
   onExportImage: AppClassProperties["onExportImage"];
-  renderWelcomeScreen: boolean;
   children?: React.ReactNode;
   app: AppClassProperties;
   generateLinkForSelection?: AppProps["generateLinkForSelection"];
@@ -95,8 +93,6 @@ const DefaultMainMenu: React.FC<{
 }> = ({ UIOptions }) => {
   return (
     <MainMenu __fallback>
-      <MainMenu.DefaultItems.LoadScene />
-      <MainMenu.DefaultItems.SaveToActiveFile />
       {/* FIXME we should to test for this inside the item itself */}
       {UIOptions.canvasActions.export && <MainMenu.DefaultItems.Export />}
       {/* FIXME we should to test for this inside the item itself */}
@@ -136,7 +132,6 @@ const LayerUI = ({
   renderCustomStats,
   UIOptions,
   onExportImage,
-  renderWelcomeScreen,
   children,
   app,
   generateLinkForSelection,
@@ -192,7 +187,6 @@ const LayerUI = ({
       {/* wrapping to Fragment stops React from occasionally complaining
                 about identical Keys */}
       <tunnels.MainMenuTunnel.Out />
-      {renderWelcomeScreen && <tunnels.WelcomeScreenMenuHintTunnel.Out />}
     </div>
   );
 
@@ -231,8 +225,7 @@ const LayerUI = ({
     const shouldShowStats =
       appState.stats.open &&
       !appState.zenModeEnabled &&
-      !appState.viewModeEnabled &&
-      appState.openDialog?.name !== "elementLinkSelector";
+      !appState.viewModeEnabled;
 
     return (
       <FixedSideContainer side="top">
@@ -241,14 +234,10 @@ const LayerUI = ({
             {renderCanvasActions()}
             {shouldRenderSelectedShapeActions && renderSelectedShapeActions()}
           </Stack.Col>
-          {!appState.viewModeEnabled &&
-            appState.openDialog?.name !== "elementLinkSelector" && (
+          {!appState.viewModeEnabled && (
               <Section heading="shapes" className="shapes-section">
                 {(heading: React.ReactNode) => (
                   <div style={{ position: "relative" }}>
-                    {renderWelcomeScreen && (
-                      <tunnels.WelcomeScreenToolbarHintTunnel.Out />
-                    )}
                     <Stack.Col gap={4} align="start">
                       <Stack.Row
                         gap={1}
@@ -316,7 +305,6 @@ const LayerUI = ({
           >
             {renderTopRightUI?.(device.editor.isMobile, appState)}
             {!appState.viewModeEnabled &&
-              appState.openDialog?.name !== "elementLinkSelector" &&
               // hide button when sidebar docked
               (!isSidebarDocked ||
                 appState.openSidebar?.name !== DEFAULT_SIDEBAR.name) && (
@@ -395,8 +383,8 @@ const LayerUI = ({
                       ? "strokeColor"
                       : "backgroundColor"
                     : colorPickerType === "elementBackground"
-                    ? "backgroundColor"
-                    : "strokeColor"]: color,
+                      ? "backgroundColor"
+                      : "strokeColor"]: color,
                 });
                 ShapeCache.delete(element);
               }
@@ -425,19 +413,6 @@ const LayerUI = ({
         />
       )}
       <ActiveConfirmDialog />
-      {appState.openDialog?.name === "elementLinkSelector" && (
-        <ElementLinkDialog
-          sourceElementId={appState.openDialog.sourceElementId}
-          onClose={() => {
-            setAppState({
-              openDialog: null,
-            });
-          }}
-          scene={app.scene}
-          appState={appState}
-          generateLinkForSelection={generateLinkForSelection}
-        />
-      )}
       <tunnels.OverwriteConfirmDialogTunnel.Out />
       {renderImageExportDialog()}
       {renderJSONExportDialog()}
@@ -468,7 +443,6 @@ const LayerUI = ({
           renderCustomStats={renderCustomStats}
           renderSidebars={renderSidebars}
           device={device}
-          renderWelcomeScreen={renderWelcomeScreen}
           UIOptions={UIOptions}
         />
       )}
@@ -478,19 +452,17 @@ const LayerUI = ({
             className="layer-ui__wrapper"
             style={
               appState.openSidebar &&
-              isSidebarDocked &&
-              device.editor.canFitSidebar
+                isSidebarDocked &&
+                device.editor.canFitSidebar
                 ? { width: `calc(100% - var(--right-sidebar-width))` }
                 : {}
             }
           >
-            {renderWelcomeScreen && <tunnels.WelcomeScreenCenterTunnel.Out />}
             {renderFixedSideContainer()}
             <Footer
               appState={appState}
               actionManager={actionManager}
               showExitZenModeBtn={showExitZenModeBtn}
-              renderWelcomeScreen={renderWelcomeScreen}
             />
             {appState.scrolledOutside && (
               <button

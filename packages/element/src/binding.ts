@@ -4,7 +4,6 @@ import {
   isBindingFallthroughEnabled,
   tupleToCoors,
   invariant,
-  isDevEnv,
   isTestEnv,
   elementCenterPoint,
 } from "@excalidraw/common";
@@ -906,7 +905,7 @@ export const bindPointToSnapToElementOutline = (
   startOrEnd: "start" | "end",
   elementsMap: ElementsMap,
 ): GlobalPoint => {
-  if (isDevEnv() || isTestEnv()) {
+  if (isTestEnv()) {
     invariant(arrow.points.length > 1, "Arrow should have at least 2 points");
   }
 

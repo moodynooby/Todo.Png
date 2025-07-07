@@ -246,14 +246,11 @@ describe("<Excalidraw/>", () => {
                   custom item
                 </button>
               </MainMenu.ItemCustom>
-              <MainMenu.DefaultItems.LoadScene />
             </MainMenu>
           </Excalidraw>,
         );
         //open menu
         toggleMenu(container);
-        // load button shouldn't be rendered since `UIActions.canvasActions.loadScene` is `false`
-        expect(queryByTestId(container, "load-button")).toBeNull();
       });
     });
   });

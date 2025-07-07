@@ -4,8 +4,6 @@ import type { Theme } from "@excalidraw/element/types";
 
 import {
   actionClearCanvas,
-  actionLoadScene,
-  actionSaveToActiveFile,
   actionToggleSearchMenu,
   actionToggleTheme,
 } from "../../actions";
@@ -39,69 +37,6 @@ import {
 } from "../icons";
 
 import "./DefaultItems.scss";
-
-export const LoadScene = () => {
-  const { t } = useI18n();
-  const actionManager = useExcalidrawActionManager();
-  const elements = useExcalidrawElements();
-
-  if (!actionManager.isActionEnabled(actionLoadScene)) {
-    return null;
-  }
-
-  const handleSelect = async () => {
-    if (
-      !elements.length ||
-      (await openConfirmModal({
-        title: t("overwriteConfirm.modal.loadFromFile.title"),
-        actionLabel: t("overwriteConfirm.modal.loadFromFile.button"),
-        color: "warning",
-        description: (
-          <Trans
-            i18nKey="overwriteConfirm.modal.loadFromFile.description"
-            bold={(text) => <strong>{text}</strong>}
-            br={() => <br />}
-          />
-        ),
-      }))
-    ) {
-      actionManager.executeAction(actionLoadScene);
-    }
-  };
-
-  return (
-    <DropdownMenuItem
-      icon={LoadIcon}
-      onSelect={handleSelect}
-      data-testid="load-button"
-      shortcut={getShortcutFromShortcutName("loadScene")}
-      aria-label={t("buttons.load")}
-    >
-      {t("buttons.load")}
-    </DropdownMenuItem>
-  );
-};
-LoadScene.displayName = "LoadScene";
-
-export const SaveToActiveFile = () => {
-  const { t } = useI18n();
-  const actionManager = useExcalidrawActionManager();
-
-  if (!actionManager.isActionEnabled(actionSaveToActiveFile)) {
-    return null;
-  }
-
-  return (
-    <DropdownMenuItem
-      shortcut={getShortcutFromShortcutName("saveScene")}
-      data-testid="save-button"
-      onSelect={() => actionManager.executeAction(actionSaveToActiveFile)}
-      icon={save}
-      aria-label={`${t("buttons.save")}`}
-    >{`${t("buttons.save")}`}</DropdownMenuItem>
-  );
-};
-SaveToActiveFile.displayName = "SaveToActiveFile";
 
 export const SaveAsImage = () => {
   const setAppState = useExcalidrawSetAppState();
@@ -189,14 +124,14 @@ ClearCanvas.displayName = "ClearCanvas";
 export const ToggleTheme = (
   props:
     | {
-        allowSystemTheme: true;
-        theme: Theme | "system";
-        onSelect: (theme: Theme | "system") => void;
-      }
+      allowSystemTheme: true;
+      theme: Theme | "system";
+      onSelect: (theme: Theme | "system") => void;
+    }
     | {
-        allowSystemTheme?: false;
-        onSelect?: (theme: Theme) => void;
-      },
+      allowSystemTheme?: false;
+      onSelect?: (theme: Theme) => void;
+    },
 ) => {
   const { t } = useI18n();
   const appState = useUIAppState();

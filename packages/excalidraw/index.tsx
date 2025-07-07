@@ -6,7 +6,6 @@ import App from "./components/App";
 import { InitializeApp } from "./components/InitializeApp";
 import Footer from "./components/footer/FooterCenter";
 import MainMenu from "./components/main-menu/MainMenu";
-import WelcomeScreen from "./components/welcome-screen/WelcomeScreen";
 import "./i18n";
 import { EditorJotaiProvider, editorJotaiStore } from "./editor-jotai";
 import polyfill from "./polyfill";
@@ -254,7 +253,6 @@ export { Button } from "./components/Button";
 export { Footer };
 export { MainMenu };
 export { useDevice } from "./components/App";
-export { WelcomeScreen };
 export { Stats } from "./components/Stats";
 
 export { DefaultSidebar } from "./components/DefaultSidebar";
@@ -270,6 +268,5 @@ export {
 } from "@excalidraw/utils/withinBounds";
 
 export { getDataURL } from "./data/blob";
-export { isElementLink } from "@excalidraw/element";
 
 export { setCustomTextMetricsProvider } from "@excalidraw/element";

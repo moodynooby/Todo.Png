@@ -8,7 +8,6 @@ import {
   DEFAULT_FONT_SIZE,
   VERTICAL_ALIGN,
   randomId,
-  isDevEnv,
 } from "@excalidraw/common";
 
 import {
@@ -304,7 +303,6 @@ const chartBaseElements = (
   y: number,
   groupId: string,
   backgroundColor: string,
-  debug?: boolean,
 ): ChartElements => {
   const { chartWidth, chartHeight } = getChartDimensions(spreadsheet);
 
@@ -321,24 +319,7 @@ const chartBaseElements = (
       })
     : null;
 
-  const debugRect = debug
-    ? newElement({
-        backgroundColor,
-        groupIds: [groupId],
-        ...commonProps,
-        type: "rectangle",
-        x,
-        y: y - chartHeight,
-        width: chartWidth,
-        height: chartHeight,
-        strokeColor: COLOR_PALETTE.black,
-        fillStyle: "solid",
-        opacity: 6,
-      })
-    : null;
-
   return [
-    ...(debugRect ? [debugRect] : []),
     ...(title ? [title] : []),
     ...chartXLabels(spreadsheet, x, y, groupId, backgroundColor),
     ...chartYLabels(spreadsheet, x, y, groupId, backgroundColor),
@@ -371,14 +352,7 @@ const chartTypeBar = (
 
   return [
     ...bars,
-    ...chartBaseElements(
-      spreadsheet,
-      x,
-      y,
-      groupId,
-      backgroundColor,
-      isDevEnv(),
-    ),
+    ...chartBaseElements(spreadsheet, x, y, groupId, backgroundColor),
   ];
 };
 
@@ -453,14 +427,7 @@ const chartTypeLine = (
   });
 
   return [
-    ...chartBaseElements(
-      spreadsheet,
-      x,
-      y,
-      groupId,
-      backgroundColor,
-      isDevEnv(),
-    ),
+    ...chartBaseElements(spreadsheet, x, y, groupId, backgroundColor),
     line,
     ...lines,
     ...dots,

@@ -86,7 +86,6 @@ export * from "./distribute";
 export * from "./dragElements";
 export * from "./duplicate";
 export * from "./elbowArrow";
-export * from "./elementLink";
 export * from "./flowchart";
 export * from "./fractionalIndex";
 export * from "./frame";
