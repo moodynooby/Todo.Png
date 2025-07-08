@@ -35,17 +35,6 @@ const MainMenu = Object.assign(
       return (
         <MainMenuTunnel.In>
           <DropdownMenu open={appState.openMenu === "canvas"}>
-            <DropdownMenu.Trigger
-              onToggle={() => {
-                setAppState({
-                  openMenu: appState.openMenu === "canvas" ? null : "canvas",
-                });
-              }}
-              data-testid="main-menu-trigger"
-              className="main-menu-trigger"
-            >
-              {HamburgerMenuIcon}
-            </DropdownMenu.Trigger>
             <DropdownMenu.Content
               onClickOutside={onClickOutside}
               onSelect={composeEventHandlers(onSelect, () => {

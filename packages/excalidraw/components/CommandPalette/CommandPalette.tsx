@@ -46,6 +46,7 @@ import {
   bucketFillIcon,
   ExportImageIcon,
   LoadIcon,
+  TrashIcon,
 } from "../icons";
 
 import { SHAPES } from "../shapes";
@@ -63,6 +64,7 @@ import type { AppProps, AppState, UIAppState } from "../../types";
 import type { ShortcutName } from "../../actions/shortcuts";
 import type { TranslationKeys } from "../../i18n";
 import type { Action } from "../../actions/types";
+import { ToolButton } from "../ToolButton";
 
 const lastUsedPaletteItem = atom<CommandPaletteItem | null>(null);
 
@@ -177,7 +179,6 @@ export const CommandPalette = Object.assign(
     defaultItems,
   },
 );
-
 function CommandPaletteInner({
   customCommandPaletteItems,
 }: CommandPaletteProps) {
@@ -297,12 +298,12 @@ function CommandPaletteInner({
             predicate: action.predicate
               ? action.predicate
               : (elements, appState, appProps, app) => {
-                  const selectedElements = getSelectedElements(
-                    elements,
-                    appState,
-                  );
-                  return selectedElements.length > 0;
-                },
+                const selectedElements = getSelectedElements(
+                  elements,
+                  appState,
+                );
+                return selectedElements.length > 0;
+              },
           }),
         ),
       );
@@ -473,10 +474,10 @@ function CommandPaletteInner({
 
           if (
             appProps.UIOptions.tools?.[
-              value as Extract<
-                typeof value,
-                keyof AppProps["UIOptions"]["tools"]
-              >
+            value as Extract<
+              typeof value,
+              keyof AppProps["UIOptions"]["tools"]
+            >
             ] === false
           ) {
             return acc;
@@ -531,16 +532,15 @@ function CommandPaletteInner({
           ...command,
           icon: command.icon || boltIcon,
           order: command.order ?? getCategoryOrder(command.category),
-          haystack: `${deburr(command.label.toLocaleLowerCase())} ${
-            command.keywords?.join(" ") || ""
-          }`,
+          haystack: `${deburr(command.label.toLocaleLowerCase())} ${command.keywords?.join(" ") || ""
+            }`,
         };
       });
 
       setAllCommands(allCommands);
       setLastUsed(
         allCommands.find((command) => command.label === lastUsed?.label) ??
-          null,
+        null,
       );
     }
   }, [
@@ -597,11 +597,11 @@ function CommandPaletteInner({
 
       return typeof command.predicate === "function"
         ? command.predicate(
-            app.scene.getNonDeletedElements(),
-            uiAppState as AppState,
-            appProps,
-            app,
-          )
+          app.scene.getNonDeletedElements(),
+          uiAppState as AppState,
+          appProps,
+          app,
+        )
         : command.predicate === undefined || command.predicate;
     },
   );
@@ -759,8 +759,8 @@ function CommandPaletteInner({
         getNextCommandsByCategory(
           showLastUsed
             ? matchingCommands.filter(
-                (command) => command.label !== lastUsed?.label,
-              )
+              (command) => command.label !== lastUsed?.label,
+            )
             : matchingCommands,
         ),
       );
@@ -888,7 +888,7 @@ const CommandItem = ({
   showShortcut: boolean;
   appState: UIAppState;
 }) => {
-  const noop = () => {};
+  const noop = () => { };
 
   return (
     <div

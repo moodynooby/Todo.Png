@@ -13,6 +13,8 @@ import { SCROLLBAR_WIDTH, SCROLLBAR_MARGIN } from "../scene/scrollbars";
 import { SelectedShapeActions, ShapesSwitcher } from "./Actions";
 import { FixedSideContainer } from "./FixedSideContainer";
 import { HandButton } from "./HandButton";
+import { CommandButton } from "./CommandButton";
+
 import { HintViewer } from "./HintViewer";
 import { Island } from "./Island";
 import { LockButton } from "./LockButton";
@@ -139,6 +141,7 @@ export const MobileMenu = ({
     return (
       <div className="App-toolbar-content">
         <MainMenuTunnel.Out />
+        <CommandButton />
         {actionManager.renderAction("toggleEditMenu")}
         {actionManager.renderAction(
           appState.multiElement ? "finalize" : "duplicateSelection",
@@ -166,8 +169,8 @@ export const MobileMenu = ({
       >
         <Island padding={0}>
           {appState.openMenu === "shape" &&
-          !appState.viewModeEnabled &&
-          showSelectedShapeActions(appState, elements) ? (
+            !appState.viewModeEnabled &&
+            showSelectedShapeActions(appState, elements) ? (
             <Section className="App-mobile-menu" heading="selectedShapeActions">
               <SelectedShapeActions
                 appState={appState}
