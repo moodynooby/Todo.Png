@@ -276,8 +276,7 @@ const LayerUI = ({
                             title={t("toolBar.hand")}
                             isMobile
                           />
-                          <CommandButton
-                          />
+                          <CommandButton />
                           <ShapesSwitcher
                             appState={appState}
                             activeTool={appState.activeTool}
@@ -380,8 +379,8 @@ const LayerUI = ({
                       ? "strokeColor"
                       : "backgroundColor"
                     : colorPickerType === "elementBackground"
-                      ? "backgroundColor"
-                      : "strokeColor"]: color,
+                    ? "backgroundColor"
+                    : "strokeColor"]: color,
                 });
                 ShapeCache.delete(element);
               }
@@ -449,8 +448,8 @@ const LayerUI = ({
             className="layer-ui__wrapper"
             style={
               appState.openSidebar &&
-                isSidebarDocked &&
-                device.editor.canFitSidebar
+              isSidebarDocked &&
+              device.editor.canFitSidebar
                 ? { width: `calc(100% - var(--right-sidebar-width))` }
                 : {}
             }

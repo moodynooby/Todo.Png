@@ -169,8 +169,8 @@ export const MobileMenu = ({
       >
         <Island padding={0}>
           {appState.openMenu === "shape" &&
-            !appState.viewModeEnabled &&
-            showSelectedShapeActions(appState, elements) ? (
+          !appState.viewModeEnabled &&
+          showSelectedShapeActions(appState, elements) ? (
             <Section className="App-mobile-menu" heading="selectedShapeActions">
               <SelectedShapeActions
                 appState={appState}

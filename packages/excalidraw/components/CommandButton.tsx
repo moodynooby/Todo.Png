@@ -1,11 +1,7 @@
 import { trackEvent } from "./../analytics";
 import { t } from "./../i18n";
-import {
-  useExcalidrawSetAppState,
-} from "./App";
-import {
-  boltIcon,
-} from "./icons";
+import { useExcalidrawSetAppState } from "./App";
+import { boltIcon } from "./icons";
 
 import { ToolButton } from "./ToolButton";
 
