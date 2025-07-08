@@ -37,6 +37,7 @@ export {
   actionChangeExportBackground,
   actionSaveToActiveFile,
   actionSaveFileToDisk,
+  actionLoadScene,
 } from "./actionExport";
 
 export { actionCopyStyles, actionPasteStyles } from "./actionStyles";

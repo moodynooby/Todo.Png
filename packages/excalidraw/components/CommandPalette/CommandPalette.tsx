@@ -14,7 +14,13 @@ import { actionToggleShapeSwitch } from "@excalidraw/excalidraw/actions/actionTo
 
 import type { MarkRequired } from "@excalidraw/common/utility-types";
 
-import { actionClearCanvas, actionToggleSearchMenu } from "../../actions";
+import { openConfirmModal } from "../OverwriteConfirm/OverwriteConfirmState";
+
+import {
+  actionClearCanvas,
+  actionToggleSearchMenu,
+  actionLoadScene,
+} from "../../actions";
 import { getShortcutFromShortcutName } from "../../actions/shortcuts";
 import { trackEvent } from "../../analytics";
 import { useUIAppState } from "../../context/ui-appState";
@@ -39,6 +45,7 @@ import {
   boltIcon,
   bucketFillIcon,
   ExportImageIcon,
+  LoadIcon,
 } from "../icons";
 
 import { SHAPES } from "../shapes";
@@ -423,6 +430,31 @@ function CommandPaletteInner({
             }));
           },
         },
+        {
+          label: t("buttons.load"),
+          category: DEFAULT_CATEGORIES.export,
+          icon: LoadIcon,
+          shortcut: getShortcutFromShortcutName("loadScene"),
+          keywords: ["open", "file", "load", "import"],
+          viewMode: false,
+          predicate: () => actionManager.isActionEnabled(actionLoadScene),
+          perform: async () => {
+            if (
+              !app.scene.getNonDeletedElements().length ||
+              (await openConfirmModal({
+                title: t("overwriteConfirm.modal.loadFromFile.title"),
+                actionLabel: t("overwriteConfirm.modal.loadFromFile.button"),
+                color: "warning",
+                description: (
+                  <b>{t("overwriteConfirm.modal.loadFromFile.description")}</b>
+                ),
+              }))
+            ) {
+              actionManager.executeAction(actionLoadScene);
+            }
+          },
+        },
+
         {
           label: t("labels.canvasBackground"),
           keywords: ["color"],

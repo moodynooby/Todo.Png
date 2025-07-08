@@ -293,7 +293,7 @@ export interface AppState {
   openDialog:
     | null
     | { name: "imageExport" | "help" | "jsonExport" }
-    | { name: "commandPalette" }
+    | { name: "commandPalette" };
 
   /**
    * Reflects user preference for whether the default sidebar should be docked.

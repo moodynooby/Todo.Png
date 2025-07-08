@@ -10,7 +10,6 @@ export const AppMainMenu: React.FC<{
 }> = React.memo((props) => {
   return (
     <MainMenu>
-      <MainMenu.DefaultItems.Export />
       <MainMenu.DefaultItems.SaveAsImage />
       <MainMenu.DefaultItems.CommandPalette />
       <MainMenu.DefaultItems.ClearCanvas />

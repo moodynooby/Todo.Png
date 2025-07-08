@@ -73,8 +73,7 @@ const Footer = ({
         className={clsx("layer-ui__wrapper__footer-right zen-mode-transition", {
           "transition-right": appState.zenModeEnabled,
         })}
-      >
-      </div>
+      ></div>
       <ExitZenModeAction
         actionManager={actionManager}
         showExitZenModeBtn={showExitZenModeBtn}

@@ -69,10 +69,7 @@ export const MobileMenu = ({
   UIOptions,
   app,
 }: MobileMenuProps) => {
-  const {
-    MainMenuTunnel,
-    DefaultSidebarTriggerTunnel,
-  } = useTunnels();
+  const { MainMenuTunnel, DefaultSidebarTriggerTunnel } = useTunnels();
   const renderToolbar = () => {
     return (
       <FixedSideContainer side="top" className="App-top-bar">
@@ -169,8 +166,8 @@ export const MobileMenu = ({
       >
         <Island padding={0}>
           {appState.openMenu === "shape" &&
-            !appState.viewModeEnabled &&
-            showSelectedShapeActions(appState, elements) ? (
+          !appState.viewModeEnabled &&
+          showSelectedShapeActions(appState, elements) ? (
             <Section className="App-mobile-menu" heading="selectedShapeActions">
               <SelectedShapeActions
                 appState={appState}
